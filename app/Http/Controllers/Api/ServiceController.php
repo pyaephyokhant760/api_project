@@ -22,13 +22,13 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $dataCreate = $request->validate([
             'business_id' => 'required',
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
          ]);
-         $create = Service::create($data);
+         $create = Service::create($dataCreate);
         return response()->json(['status' => true,'message'=> $create],200);
     }
 

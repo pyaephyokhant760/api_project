@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -15,6 +17,31 @@ class UserController extends Controller
     {
         $data = User::all();
         return ['data' => $data];
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|between:2,100',
+            'email' => 'required|string|max:100|unique:users',
+            'password' => 'required|string|min:6',
+            'role' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return response()->json($validator->errors(),200);
+        }
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+         ]);
+
+        return response()->json(['message' => 'Create Success','user' => $user], 200);
     }
 
     /**

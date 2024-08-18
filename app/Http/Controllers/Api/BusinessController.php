@@ -26,7 +26,6 @@ class BusinessController extends Controller
             'user_id' => 'required',
             'name' => 'required',
             'opening_hours' => 'required',
-            'status' => 'required',
         ]);
          $create = Business::create($data);
         return response()->json(['status' => true,'message'=> $create],200);
@@ -54,7 +53,6 @@ class BusinessController extends Controller
             'user_id' => 'required',
             'name' => 'required',
             'opening_hours' => 'required',
-            'status' => 'required',
          ]);
 
          $searchId = Business::where('id',$id)->first();

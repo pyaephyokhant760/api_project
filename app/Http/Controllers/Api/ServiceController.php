@@ -29,7 +29,7 @@ class ServiceController extends Controller
             'price' => 'required',
          ]);
          $create = Service::create($dataCreate);
-        return response()->json(['status' => true,'message'=> $create],200);
+        return response()->json(['status' => true,'message'=> $create,'letter' => 'Create Success'],200);
     }
 
     /**

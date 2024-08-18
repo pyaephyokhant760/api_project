@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId("user_id")->constrained('users');
-            $table->dateTime('opening_hours');
+            $table->string('opening_hours');
             $table->enum('string',['open','close'])->default('open');
             $table->timestamps();
         });
